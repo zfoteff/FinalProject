@@ -1,6 +1,5 @@
 package server;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,6 +11,9 @@ public class ServerModel
     protected static boolean listening = false;
     protected ServerSocket serverSocket;
     protected Socket clientSocket;
+    protected BufferedReader in;
+    protected PrintWriter out;
+
 
     public ServerModel(int portNum)
     {
@@ -38,6 +40,10 @@ public class ServerModel
         {
             try {
                 clientSocket = serverSocket.accept();
+
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -49,7 +55,6 @@ public class ServerModel
         listening = false;
 
         try {
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             out.println(CLOSING);
             clientSocket.close();
         } catch (IOException e) {
