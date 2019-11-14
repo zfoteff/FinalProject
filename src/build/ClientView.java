@@ -84,8 +84,4 @@ public class ClientView extends JFrame {
         panel.add(player2Panel);
 
     }
-
-    public static void main(String[] args) {
-        ClientView view = new ClientView();
-    }
 }

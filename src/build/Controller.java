@@ -23,7 +23,7 @@ public class Controller implements KeyListener
 
     public void keyPressed(KeyEvent e)
     {
-        int winner;
+        int winner = 0;
         if (e.getKeyCode() == VK_A)
         {
             model.moveP1();
@@ -46,7 +46,8 @@ public class Controller implements KeyListener
 
         if (winner == 2)
         {
-
+            // p2 win condition
+            int i = 0;
         }
     }
 
