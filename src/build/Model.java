@@ -25,11 +25,19 @@ public class Model
         p2Location -= 5;
     }
 
-    //  return true if p1 is at the right edge of the screen, or p2 is at the left edge of the screen
-    public boolean isWinner()
+    //  return 1 if p1 is at the right edge of the screen, 2 if p2 is at the left edge of the screen, 0 otherwise
+    public int isWinner()
     {
-        if (p1Location >= 100 || p2Location <= 0)
-            return true;
-        return false;
+        if (p1Location >= 100) { return 1; }
+
+        if (p2Location <= 0) { return 2; }
+
+        else { return 0; }
+    }
+
+    public static void main(String[] args)
+    {
+        Model m = new Model();
+        Controller c = new Controller(m);
     }
 }
