@@ -12,9 +12,11 @@ public class ClientView extends JFrame {
     protected JLabel timer;
     protected JLabel overallBestPlayer;
     protected JLabel overallBestTime;
+    protected Controller controller;
 
-    public ClientView(){
+    public ClientView(Controller c){
         super("Fun Clicker Game");
+        this.controller = c;
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setupUI();
