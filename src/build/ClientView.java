@@ -14,6 +14,7 @@ public class ClientView extends JFrame {
     protected JLabel overallBestTime;
     protected Controller controller;
 
+
     public ClientView(Controller c){
         super("Fun Clicker Game");
         this.controller = c;
@@ -21,8 +22,8 @@ public class ClientView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setupUI();
         pack();
-
     }
+
 
     public void setupUI(){
         //main panel
@@ -82,6 +83,5 @@ public class ClientView extends JFrame {
         best2Time = new JLabel("0:00");
         player2Panel.add(best2Time);
         panel.add(player2Panel);
-
     }
 }

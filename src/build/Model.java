@@ -4,6 +4,10 @@ public class Model
 {
     public int p1Location; //  place p1 in middle of the screen
     public int p2Location; //  place p2 in middle of the screen
+    public int p1Wins = 0;
+    public int p2Wins = 0;
+    public int p1Losses = 0;
+    public int p2Losses = 0;
 
     public Model()
     {

@@ -1,4 +1,4 @@
-Final Project (working title)
+Ball-ieve in your speed
 ==============================
 ##Team: Rebekah Hale, Kat Sotelo, Zac Foteff
 

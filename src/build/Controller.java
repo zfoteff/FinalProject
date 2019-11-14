@@ -16,10 +16,7 @@ public class Controller implements KeyListener
         view = new ClientView(this);
     }
 
-    public void keyTyped(KeyEvent e)
-    {
-        System.out.println("Key pressed");
-    }
+    public void keyTyped(KeyEvent e) { System.out.println("Key pressed"); }
 
     public void keyPressed(KeyEvent e)
     {
@@ -41,13 +38,18 @@ public class Controller implements KeyListener
         if (winner == 1)
         {
             // p1 win condition
-            int i = 0;
+            model.p1Wins++;
+            model.p2Losses++;
+            view.win1Count.setText(""+model.p1Wins);
+            view.loss2Count.setText(""+model.p2Losses);
         }
 
         if (winner == 2)
         {
-            // p2 win condition
-            int i = 0;
+            model.p1Losses++;
+            model.p2Wins++;
+            view.win2Count.setText(""+model.p2Wins);
+            view.loss1Count.setText(""+model.p1Losses);
         }
     }
 
