@@ -43,5 +43,8 @@ public class Model
     {
         Model m = new Model();
         Controller c = new Controller(m);
+        DataBaseTester test = new DataBaseTester();
+        DataBaseContact contact = new DataBaseContact(30, "Bob", "200", "9000");
+        test.insertRecords(contact);
     }
 }
