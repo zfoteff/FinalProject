@@ -6,23 +6,29 @@ import java.io.BufferedReader;
 
 public class GraphicsPanel extends JPanel
 {
-    ClientView targetView;
-    Point start;
-    Point end;
-    JLabel backgroundImage;
+    protected ClientView targetView;
+    protected Point start;
+    protected Point end;
+    protected JLabel backgroundImage;
+    protected JLabel players;
 
     public GraphicsPanel(ClientView view)
     {
         targetView = view;
         setBackground(Color.WHITE);
-        backgroundImage = new JLabel(getScaledImage());
+        backgroundImage = new JLabel(getScaledImage("Untitled-1.jpeg", 1000, 350));
+        players = new JLabel(getScaledImage("doggos.png", 300, 200));
+        
         this.add(backgroundImage);
+        this.add(players);
+        this.setComponentZOrder(backgroundImage, 0);
+        this.setComponentZOrder(players, 1);
     }
 
     @Override
     protected void paintComponent(Graphics g)
     {
-        ImageIcon background = getScaledImage();
+        ImageIcon background = getScaledImage("Untitled-1.jpeg", 1000, 350);
         backgroundImage.setIcon(background);
 
         super.paintComponent(g);
@@ -37,11 +43,11 @@ public class GraphicsPanel extends JPanel
         }
     }
 
-    public ImageIcon getScaledImage()
+    public ImageIcon getScaledImage(String path, int w, int h)
     {
-        ImageIcon screen = new ImageIcon("Untitled-1.jpeg");
+        ImageIcon screen = new ImageIcon(path);
         Image image = screen.getImage();
-        Image screenFit = image.getScaledInstance(1000, 350, Image.SCALE_SMOOTH);
+        Image screenFit = image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
         screen = new ImageIcon(screenFit);
 
         return screen;

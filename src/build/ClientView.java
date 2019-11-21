@@ -28,7 +28,6 @@ public class ClientView extends JFrame {
         pack();
     }
 
-
     public void setupUI(){
         //main panel
         JPanel panel = (JPanel) getContentPane();
