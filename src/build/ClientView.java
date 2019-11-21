@@ -1,6 +1,9 @@
 package build;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 public class ClientView extends JFrame {
     protected JLabel win1Count;
@@ -13,7 +16,8 @@ public class ClientView extends JFrame {
     protected JLabel overallBestPlayer;
     protected JLabel overallBestTime;
     protected Controller controller;
-
+    public GraphicsPanel graphicsPanel;
+    public JLabel screen;
 
     public ClientView(Controller c){
         super("Fun Clicker Game");
@@ -28,7 +32,12 @@ public class ClientView extends JFrame {
     public void setupUI(){
         //main panel
         JPanel panel = (JPanel) getContentPane();
-        panel.setLayout(new FlowLayout());
+        panel.setPreferredSize(new Dimension(750, 500));
+        JPanel info = new JPanel();
+        info.setPreferredSize(new Dimension(750, 100));
+        panel.setLayout(new BorderLayout());
+
+        graphicsPanel = new GraphicsPanel(this);
 
         //player 1 panel
         JPanel player1Panel = new JPanel();
@@ -46,7 +55,7 @@ public class ClientView extends JFrame {
         player1Panel.add(bestTimeLabel);
         best1Time = new JLabel("0:00");
         player1Panel.add(best1Time);
-        panel.add(player1Panel);
+        info.add(player1Panel);
 
         //timer panel
         JPanel timerPanel = new JPanel();
@@ -64,7 +73,7 @@ public class ClientView extends JFrame {
         timerPanel.add(overallBestPlayer);
         overallBestTime = new JLabel("0:00");
         timerPanel.add(overallBestTime);
-        panel.add(timerPanel);
+        info.add(timerPanel);
 
         //player2 panel
         JPanel player2Panel = new JPanel();
@@ -82,6 +91,9 @@ public class ClientView extends JFrame {
         player2Panel.add(bestTime2Label);
         best2Time = new JLabel("0:00");
         player2Panel.add(best2Time);
-        panel.add(player2Panel);
+        info.add(player2Panel);;
+
+        panel.add(info, BorderLayout.NORTH);
+        panel.add(graphicsPanel, BorderLayout.CENTER);
     }
 }
