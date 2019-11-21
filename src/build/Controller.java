@@ -23,6 +23,7 @@ public class Controller implements KeyListener
         if (e.getKeyCode() == VK_A)
         {
             model.moveP1();
+            view.graphicsPanel.repaint();
 
             winner = model.isWinner();
         }

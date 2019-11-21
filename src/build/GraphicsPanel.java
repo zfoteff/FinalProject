@@ -9,38 +9,35 @@ public class GraphicsPanel extends JPanel
     protected ClientView targetView;
     protected Point start;
     protected Point end;
-    protected JLabel backgroundImage;
+    protected Background backgroundImage;
     protected JLabel players;
 
     public GraphicsPanel(ClientView view)
     {
         targetView = view;
         setBackground(Color.WHITE);
-        backgroundImage = new JLabel(getScaledImage("Untitled-1.jpeg", 1000, 350));
+        backgroundImage = new Background();
         players = new JLabel(getScaledImage("doggos.png", 300, 200));
-        
-        this.add(backgroundImage);
+
         this.add(players);
-        this.setComponentZOrder(backgroundImage, 0);
-        this.setComponentZOrder(players, 1);
     }
 
     @Override
     protected void paintComponent(Graphics g)
     {
-        ImageIcon background = getScaledImage("Untitled-1.jpeg", 1000, 350);
-        backgroundImage.setIcon(background);
+       // ImageIcon background = getScaledImage("Untitled-1.jpeg", 1000, 350);
+        //backgroundImage.setIcon(background);
 
         super.paintComponent(g);
-        if (start != null)
-        {
-            int x = start.x;
-            int y = start.y;
-            int w = Math.abs(start.x - end.x);
-            int h = Math.abs(start.y - end.y);
 
+        drawSprites(g);
+    }
 
-        }
+    private void drawSprites(Graphics g)
+    {
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.drawImage(backgroundImage.getImage(), backgroundImage.getX(), backgroundImage.getY(), this);
     }
 
     public ImageIcon getScaledImage(String path, int w, int h)
