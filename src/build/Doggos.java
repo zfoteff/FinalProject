@@ -2,12 +2,10 @@ package build;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Doggos
 {
-    private int dx;
+    private final int DX = 5;
     private int x = 245;
     private int y = 90;
     private int w = 225;
@@ -26,10 +24,12 @@ public class Doggos
         image = image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
     }
 
-    private void move()
+    public void moveRight()
     {
-        x += dx;
+        x += DX;
     }
+
+    public void moveLeft() { x -= DX; }
 
     public int getX()
     {
@@ -46,30 +46,12 @@ public class Doggos
         return w;
     }
 
-    public int getH()
-    {
-        return h;
-    }
+    public int getH() { return h; }
+
+    public void setX(int newX) { x  = newX; }
 
     public Image getImage()
     {
         return image;
-    }
-
-    public void keyPressed(KeyEvent e)
-    {
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_A)
-            dx = -2;
-
-        if (key == KeyEvent.VK_D)
-            dx = 2;
-    }
-
-    public void keyReleased(KeyEvent e)
-    {
-        move();
-        dx = 0;
     }
 }

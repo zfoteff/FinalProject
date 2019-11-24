@@ -26,13 +26,18 @@ public class Controller implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        view.graphicsPanel.players.keyPressed(e);
+        if (e.getKeyCode() == VK_A)
+            view.graphicsPanel.players.moveLeft();
+
+        else if (e.getKeyCode() == VK_L)
+            view.graphicsPanel.players.moveRight();
+
+        view.graphicsPanel.repaint();
     }
 
     @Override
     public void keyReleased(KeyEvent e)
     {
-        view.graphicsPanel.players.keyReleased(e);
         view.graphicsPanel.repaint();
     }
 }
