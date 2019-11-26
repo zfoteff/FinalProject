@@ -1,11 +1,17 @@
 package build;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 
-public class ClientView extends JFrame {
+import static java.awt.event.KeyEvent.VK_A;
+import static java.awt.event.KeyEvent.VK_L;
+
+public class ClientView extends JFrame implements KeyListener
+{
     protected JLabel win1Count;
     protected JLabel loss1Count;
     protected JLabel best1Time;
@@ -25,15 +31,16 @@ public class ClientView extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setupUI();
+        addKeyListener(this);
         pack();
     }
 
     public void setupUI(){
         //main panel
         JPanel panel = (JPanel) getContentPane();
-        panel.setPreferredSize(new Dimension(750, 500));
+        panel.setPreferredSize(new Dimension(900, 350));
         JPanel info = new JPanel();
-        info.setPreferredSize(new Dimension(750, 100));
+        info.setPreferredSize(new Dimension(900, 100));
         panel.setLayout(new BorderLayout());
 
         graphicsPanel = new GraphicsPanel(this);
@@ -92,7 +99,36 @@ public class ClientView extends JFrame {
         player2Panel.add(best2Time);
         info.add(player2Panel);;
 
+        graphicsPanel.setVisible(true);
+        graphicsPanel.requestFocusInWindow();
+
         panel.add(info, BorderLayout.NORTH);
         panel.add(graphicsPanel, BorderLayout.CENTER);
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent)
+    {
+       return;
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        repaint();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        System.out.println("KEY PRESS");
+        if (e.getKeyCode() == VK_A)
+            graphicsPanel.players.moveRight();
+
+        else if (e.getKeyCode() == VK_L)
+            graphicsPanel.players.moveLeft();
+
+        graphicsPanel.repaint();
     }
 }
