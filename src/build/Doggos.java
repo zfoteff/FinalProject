@@ -6,10 +6,10 @@ import java.awt.*;
 public class Doggos
 {
     private final int DX = 5;
-    private int x = 245;
+    private int x = 400;
     private int y = 90;
-    private int w = 225;
-    private int h = 150;
+    private int w = 175;
+    private int h = 100;
     private Image image;
 
     public Doggos()
@@ -36,19 +36,12 @@ public class Doggos
         return x;
     }
 
-    public int getY()
-    {
-        return y;
-    }
+    public int getY() { return y; }
 
     public int getW()
     {
         return w;
     }
-
-    public int getH() { return h; }
-
-    public void setX(int newX) { x  = newX; }
 
     public Image getImage()
     {

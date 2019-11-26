@@ -1,13 +1,10 @@
 package build;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public class Background
 {
-    private int dx;
-    private int x = -125;
+    private int x = 0;
     private int y = 0;
     private int w = 1000;
     private int h = 325;
@@ -25,16 +22,10 @@ public class Background
         image = image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
     }
 
-    private void move()
-    {
-        x += dx;
-    }
-
     public int getX()
     {
         return x;
     }
-
 
     public int getY()
     {
@@ -44,11 +35,6 @@ public class Background
     public int getW()
     {
         return w;
-    }
-
-    public int getH()
-    {
-        return h;
     }
 
     public Image getImage()

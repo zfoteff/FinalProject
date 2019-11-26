@@ -22,6 +22,26 @@ public class GraphicsPanel extends JPanel
     {
         super.paintComponent(g);
         drawSprites(g);
+
+        if (isWinner())
+            System.out.println("Yay");
+    }
+
+    public boolean isWinner()
+    {
+        int backgroundRightEdge = backgroundImage.getW();
+        int backgroundLeftEdge = 0;
+        int playerPosition = players.getX();
+        int playerWidth = players.getW();
+
+        if (playerPosition <= backgroundLeftEdge)
+            return true;
+
+        else if (playerPosition + playerWidth >= backgroundRightEdge)
+            return true;
+
+        else
+            return false;
     }
 
     private void drawSprites(Graphics g)

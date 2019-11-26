@@ -3,9 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_L;
@@ -38,7 +35,7 @@ public class ClientView extends JFrame implements KeyListener
     public void setupUI(){
         //main panel
         JPanel panel = (JPanel) getContentPane();
-        panel.setPreferredSize(new Dimension(900, 350));
+        panel.setPreferredSize(new Dimension(1000, 425));
         JPanel info = new JPanel();
         info.setPreferredSize(new Dimension(900, 100));
         panel.setLayout(new BorderLayout());
@@ -128,6 +125,7 @@ public class ClientView extends JFrame implements KeyListener
 
         else if (e.getKeyCode() == VK_L)
             graphicsPanel.players.moveLeft();
+
 
         graphicsPanel.repaint();
     }
