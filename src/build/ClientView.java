@@ -15,7 +15,7 @@ public class ClientView extends JFrame implements KeyListener
     protected JLabel win2Count;
     protected JLabel loss2Count;
     protected JLabel best2Time;
-    protected JLabel timer;
+    protected JLabel timerText;
     protected JLabel overallBestPlayer;
     protected JLabel overallBestTime;
     protected Controller controller;
@@ -38,7 +38,7 @@ public class ClientView extends JFrame implements KeyListener
     
         //main panel
         JPanel panel = (JPanel) getContentPane();
-        panel.setPreferredSize(new Dimension(1000, 425));
+        panel.setPreferredSize(new Dimension(1750, 600));
         JPanel info = new JPanel();
         info.setPreferredSize(new Dimension(900, 100));
         panel.setLayout(new BorderLayout());
@@ -67,8 +67,8 @@ public class ClientView extends JFrame implements KeyListener
         JPanel timerPanel = new JPanel();
         timerPanel.setBorder(BorderFactory.createTitledBorder("Timer"));
         timerPanel.setLayout(new GridLayout(3,2));
-        timer = new JLabel("0:00");
-        timerPanel.add(timer);
+        timerText = new JLabel("0:00");
+        timerPanel.add(timerText);
         JLabel timerSpace = new JLabel();
         timerPanel.add(timerSpace);
         JLabel overallBestTimeLabel = new JLabel("Best time: ");
@@ -106,7 +106,6 @@ public class ClientView extends JFrame implements KeyListener
         panel.add(graphicsPanel, BorderLayout.CENTER);
         
         menu.enterPlayerNames(player1Panel, player2Panel);
-
     }
 
 

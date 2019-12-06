@@ -24,7 +24,10 @@ public class GraphicsPanel extends JPanel
         drawSprites(g);
 
         if (isWinner())
+        {
             System.out.println("Yay");
+            players.freeze(true);
+        }
     }
 
     public boolean isWinner()
@@ -42,6 +45,8 @@ public class GraphicsPanel extends JPanel
 
         else
             return false;
+
+
     }
 
     private void drawSprites(Graphics g)

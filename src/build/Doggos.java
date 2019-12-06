@@ -5,12 +5,13 @@ import java.awt.*;
 
 public class Doggos
 {
-    private final int DX = 5;
-    private int x = 400;
-    private int y = 90;
-    private int w = 175;
-    private int h = 100;
+    private final int DX = 100;
+    private int x = 710;
+    private int y = 185;
+    private int w = 350;
+    private int h = 200;
     private Image image;
+    private boolean isFrozen = true;
 
     public Doggos()
     {
@@ -26,10 +27,21 @@ public class Doggos
 
     public void moveRight()
     {
-        x += DX;
+        if (isFrozen)
+            x = x;
+
+        else
+            x += DX;
     }
 
-    public void moveLeft() { x -= DX; }
+    public void moveLeft()
+    {
+        if (isFrozen)
+            x = x;
+
+        else
+            x -= DX;
+    }
 
     public int getX()
     {
@@ -46,5 +58,10 @@ public class Doggos
     public Image getImage()
     {
         return image;
+    }
+
+    public void freeze(boolean freeze)
+    {
+        isFrozen = freeze;
     }
 }

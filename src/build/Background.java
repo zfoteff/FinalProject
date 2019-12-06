@@ -6,8 +6,8 @@ public class Background
 {
     private int x = 0;
     private int y = 0;
-    private int w = 1000;
-    private int h = 325;
+    private int w = 1750;
+    private int h = 500;
     private Image image;
 
     public Background()
