@@ -33,6 +33,9 @@ public class ClientView extends JFrame implements KeyListener
     }
 
     public void setupUI(){
+        Menu menu = new Menu();
+        menu.showMenu();
+    
         //main panel
         JPanel panel = (JPanel) getContentPane();
         panel.setPreferredSize(new Dimension(1000, 425));
@@ -101,6 +104,9 @@ public class ClientView extends JFrame implements KeyListener
 
         panel.add(info, BorderLayout.NORTH);
         panel.add(graphicsPanel, BorderLayout.CENTER);
+        
+        menu.enterPlayerNames(player1Panel, player2Panel);
+
     }
 
 
