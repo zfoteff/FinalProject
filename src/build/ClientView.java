@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_L;
 
-public class ClientView extends JFrame implements KeyListener
+public class ClientView extends JFrame
 {
     protected JLabel win1Count;
     protected JLabel loss1Count;
@@ -18,9 +18,10 @@ public class ClientView extends JFrame implements KeyListener
     protected JLabel timerText;
     protected JLabel overallBestPlayer;
     protected JLabel overallBestTime;
+    protected JButton reset = new JButton("Reset");
     protected Controller controller;
+    public Timer timer;
     public GraphicsPanel graphicsPanel;
-    public JLabel screen;
 
     public ClientView(Controller c){
         super("Fun Clicker Game");
@@ -28,7 +29,6 @@ public class ClientView extends JFrame implements KeyListener
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setupUI();
-        addKeyListener(this);
         pack();
     }
 
@@ -39,99 +39,83 @@ public class ClientView extends JFrame implements KeyListener
         //main panel
         JPanel panel = (JPanel) getContentPane();
         panel.setPreferredSize(new Dimension(1750, 600));
-        JPanel info = new JPanel();
-        info.setPreferredSize(new Dimension(900, 100));
         panel.setLayout(new BorderLayout());
 
+        //  info panel
+        //  - contains: player info panel, timer, reset button
+        JPanel info = new JPanel();
+        info.setPreferredSize(new Dimension(900, 100));
+        info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
         graphicsPanel = new GraphicsPanel(this);
+        graphicsPanel.setVisible(true);
+        graphicsPanel.requestFocusInWindow();
+
+        //  player info panel
+        //  - contains: player 1 wins and losses, player 2 wins and losses
+        JPanel playerInfo = new JPanel();
+        playerInfo.setPreferredSize(new Dimension(900, 80));
 
         //player 1 panel
         JPanel player1Panel = new JPanel();
         player1Panel.setBorder(BorderFactory.createTitledBorder("Player 1 Stats"));
         player1Panel.setLayout(new GridLayout(3,2));
         JLabel winLabel = new JLabel("Wins: ");
-        player1Panel.add(winLabel);
         win1Count = new JLabel("0");
-        player1Panel.add(win1Count);
         JLabel lossLabel = new JLabel("Losses: ");
-        player1Panel.add(lossLabel);
         loss1Count = new JLabel("0");
-        player1Panel.add(loss1Count);
         JLabel bestTimeLabel = new JLabel("Best time: ");
-        player1Panel.add(bestTimeLabel);
         best1Time = new JLabel("0:00");
+        player1Panel.add(winLabel);
+        player1Panel.add(win1Count);
+        player1Panel.add(lossLabel);
+        player1Panel.add(loss1Count);
+        player1Panel.add(bestTimeLabel);
         player1Panel.add(best1Time);
-        info.add(player1Panel);
 
         //timer panel
         JPanel timerPanel = new JPanel();
         timerPanel.setBorder(BorderFactory.createTitledBorder("Timer"));
         timerPanel.setLayout(new GridLayout(3,2));
         timerText = new JLabel("0:00");
-        timerPanel.add(timerText);
         JLabel timerSpace = new JLabel();
-        timerPanel.add(timerSpace);
         JLabel overallBestTimeLabel = new JLabel("Best time: ");
-        timerPanel.add(overallBestTimeLabel);
         JLabel emptySpace = new JLabel();
-        timerPanel.add(emptySpace);
         overallBestPlayer = new JLabel("Player");
-        timerPanel.add(overallBestPlayer);
         overallBestTime = new JLabel("0:00");
+        timerPanel.add(timerText);
+        timerPanel.add(timerSpace);
+        timerPanel.add(overallBestTimeLabel);
+        timerPanel.add(emptySpace);
+        timerPanel.add(overallBestPlayer);
         timerPanel.add(overallBestTime);
-        info.add(timerPanel);
 
         //player2 panel
         JPanel player2Panel = new JPanel();
         player2Panel.setBorder(BorderFactory.createTitledBorder("Player 2 Stats"));
         player2Panel.setLayout(new GridLayout(3,2));
         JLabel win2Label = new JLabel("Wins: ");
-        player2Panel.add(win2Label);
         win2Count = new JLabel("0");
-        player2Panel.add(win2Count);
         JLabel loss2Label = new JLabel("Losses: ");
-        player2Panel.add(loss2Label);
         loss2Count = new JLabel("0");
-        player2Panel.add(loss2Count);
         JLabel bestTime2Label = new JLabel("Best time: ");
-        player2Panel.add(bestTime2Label);
         best2Time = new JLabel("0:00");
+        player2Panel.add(win2Label);
+        player2Panel.add(win2Count);
         player2Panel.add(best2Time);
-        info.add(player2Panel);;
+        player2Panel.add(bestTime2Label);
+        player2Panel.add(loss2Count);
+        player2Panel.add(loss2Label);
 
-        graphicsPanel.setVisible(true);
-        graphicsPanel.requestFocusInWindow();
+        playerInfo.add(player1Panel);
+        playerInfo.add(timerPanel);
+        playerInfo.add(player2Panel);
+
+        info.add(playerInfo);
+        info.add(reset);
 
         panel.add(info, BorderLayout.NORTH);
         panel.add(graphicsPanel, BorderLayout.CENTER);
         
         menu.enterPlayerNames(player1Panel, player2Panel);
-    }
-
-
-    @Override
-    public void keyTyped(KeyEvent keyEvent)
-    {
-       return;
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        repaint();
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-        System.out.println("KEY PRESS");
-        if (e.getKeyCode() == VK_A)
-            graphicsPanel.players.moveRight();
-
-        else if (e.getKeyCode() == VK_L)
-            graphicsPanel.players.moveLeft();
-
-
-        graphicsPanel.repaint();
     }
 }

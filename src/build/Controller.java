@@ -3,12 +3,16 @@ package build;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Controller
+import static java.awt.event.KeyEvent.VK_A;
+import static java.awt.event.KeyEvent.VK_L;
+
+public class Controller implements KeyListener
 {
     Model model;
     ClientView view;
-    private Timer timer;
     private final int DELAY = 1000;
     private int rightSideTimer = 0;
     private int leftSideTimer = 0;
@@ -20,7 +24,7 @@ public class Controller
         view = new ClientView(this);
         view.graphicsPanel.players.freeze(false);
 
-        timer = new Timer(DELAY, new ActionListener()
+        view.timer = new Timer(DELAY, new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent actionEvent)
@@ -30,7 +34,8 @@ public class Controller
             }
         });
 
-        timer.start();
+        view.addKeyListener(this);
+        view.timer.start();
     }
 
     public void incrementTimer()
@@ -52,6 +57,32 @@ public class Controller
 
             break;
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent)
+    {
+        return;
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        view.graphicsPanel.repaint();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        System.out.println("KEY PRESS");
+        if (e.getKeyCode() == VK_A)
+            view.graphicsPanel.players.moveRight();
+
+        else if (e.getKeyCode() == VK_L)
+            view.graphicsPanel.players.moveLeft();
+
+
+        view.graphicsPanel.repaint();
     }
 
     public static void main(String[] args)
