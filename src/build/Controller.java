@@ -37,6 +37,7 @@ public class Controller implements KeyListener
             public void actionPerformed(ActionEvent actionEvent)
             {
                 view.graphicsPanel.reset();
+                view.graphicsPanel.repaint();
                 view.timer.restart();
                 view.requestFocusInWindow();
             }
@@ -89,13 +90,27 @@ public class Controller implements KeyListener
         else if (e.getKeyCode() == VK_L)
             view.graphicsPanel.players.moveLeft();
 
-
         view.graphicsPanel.repaint();
 
-        if (view.graphicsPanel.isWinner())
+        if (view.graphicsPanel.isWinner() == 1)
         {
             view.graphicsPanel.players.freeze(true);
             view.timer.stop();
+            model.p1Wins++;
+            model.p2Losses++;
+            view.win1Count.setText(""+model.p1Wins);
+            view.loss2Count.setText(""+model.p2Losses);
+
+
+        }
+
+        else if (view.graphicsPanel.isWinner() == 2)
+        {
+            view.graphicsPanel.players.freeze(true);
+            view.timer.stop();
+            model.p1Losses++;
+            model.p2Wins++;
+            view.loss1Count.setText(""+);
         }
     }
 

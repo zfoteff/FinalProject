@@ -53,13 +53,13 @@ public class ClientView extends JFrame
         JPanel player1Panel = new JPanel();
         player1Panel.setBorder(BorderFactory.createTitledBorder("Player 1 Stats"));
         player1Panel.setLayout(new GridLayout(3,2));
-        JLabel winLabel = new JLabel("Wins: ");
+        JLabel win1Label = new JLabel("Wins: ");
         win1Count = new JLabel("0");
         JLabel lossLabel = new JLabel("Losses: ");
         loss1Count = new JLabel("0");
         JLabel bestTimeLabel = new JLabel("Best time: ");
         best1Time = new JLabel("0:00");
-        player1Panel.add(winLabel);
+        player1Panel.add(win1Label);
         player1Panel.add(win1Count);
         player1Panel.add(lossLabel);
         player1Panel.add(loss1Count);
@@ -96,9 +96,10 @@ public class ClientView extends JFrame
         player2Panel.add(win2Label);
         player2Panel.add(win2Count);
         player2Panel.add(best2Time);
-        player2Panel.add(bestTime2Label);
-        player2Panel.add(loss2Count);
         player2Panel.add(loss2Label);
+        player2Panel.add(loss2Count);
+        player2Panel.add(bestTime2Label);
+        player2Panel.add(best2Time);
 
         playerInfo.add(player1Panel);
         playerInfo.add(timerPanel);

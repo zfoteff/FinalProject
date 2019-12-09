@@ -17,7 +17,7 @@ public class GraphicsPanel extends JPanel
         requestFocusInWindow();
     }
 
-    public boolean isWinner()
+    public int isWinner()
     {
         int backgroundRightEdge = backgroundImage.getW();
         int backgroundLeftEdge = 0;
@@ -25,13 +25,13 @@ public class GraphicsPanel extends JPanel
         int playerWidth = players.getW();
 
         if (playerPosition <= backgroundLeftEdge)
-            return true;
+            return 2;
 
         else if (playerPosition + playerWidth >= backgroundRightEdge)
-            return true;
+            return 1;
 
         else
-            return false;
+            return 0;
     }
 
     public void reset()
