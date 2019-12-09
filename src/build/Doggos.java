@@ -43,6 +43,12 @@ public class Doggos
             x -= DX;
     }
 
+    public void resetPosition()
+    {
+        x = 710;
+        y = 185;
+    }
+
     public int getX()
     {
         return x;

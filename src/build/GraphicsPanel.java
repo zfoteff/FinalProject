@@ -17,19 +17,6 @@ public class GraphicsPanel extends JPanel
         requestFocusInWindow();
     }
 
-    @Override
-    protected void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-        drawSprites(g);
-
-        if (isWinner())
-        {
-            System.out.println("Yay");
-            players.freeze(true);
-        }
-    }
-
     public boolean isWinner()
     {
         int backgroundRightEdge = backgroundImage.getW();
@@ -45,8 +32,11 @@ public class GraphicsPanel extends JPanel
 
         else
             return false;
+    }
 
-
+    public void reset()
+    {
+        players.resetPosition();
     }
 
     private void drawSprites(Graphics g)
@@ -57,4 +47,10 @@ public class GraphicsPanel extends JPanel
         g2.drawImage(players.getImage(), players.getX(), players.getY(), this);
     }
 
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        drawSprites(g);
+    }
 }

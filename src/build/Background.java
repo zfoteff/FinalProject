@@ -12,14 +12,15 @@ public class Background
 
     public Background()
     {
-        loadImage();
+        image = loadImage();
     }
 
-    private void loadImage()
+    private Image loadImage()
     {
         ImageIcon newImage = new ImageIcon("Untitled-1.jpeg");
         image = newImage.getImage();
         image = image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+        return image;
     }
 
     public int getX()

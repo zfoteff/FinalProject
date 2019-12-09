@@ -1,11 +1,6 @@
 package build;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import static java.awt.event.KeyEvent.VK_A;
-import static java.awt.event.KeyEvent.VK_L;
 
 public class ClientView extends JFrame
 {
@@ -23,7 +18,8 @@ public class ClientView extends JFrame
     public Timer timer;
     public GraphicsPanel graphicsPanel;
 
-    public ClientView(Controller c){
+    public ClientView(Controller c)
+    {
         super("Fun Clicker Game");
         this.controller = c;
         setVisible(true);
@@ -32,10 +28,8 @@ public class ClientView extends JFrame
         pack();
     }
 
-    public void setupUI(){
-        Menu menu = new Menu();
-        menu.showMenu();
-    
+    public void setupUI()
+    {
         //main panel
         JPanel panel = (JPanel) getContentPane();
         panel.setPreferredSize(new Dimension(1750, 600));
@@ -115,7 +109,10 @@ public class ClientView extends JFrame
 
         panel.add(info, BorderLayout.NORTH);
         panel.add(graphicsPanel, BorderLayout.CENTER);
-        
+
+
+        Menu menu = new Menu();
+        int choice = menu.showMenu();
         menu.enterPlayerNames(player1Panel, player2Panel);
     }
 }
