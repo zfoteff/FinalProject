@@ -113,7 +113,8 @@ public class ClientView extends JFrame
 
 
         Menu menu = new Menu();
-        int choice = menu.showMenu();
+        int choice = menu.showMenu(this);
         menu.enterPlayerNames(player1Panel, player2Panel);
+        menu.countdown(this);
     }
 }

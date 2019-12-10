@@ -45,8 +45,8 @@ public class Doggos
 
     public void resetPosition()
     {
-        x = 710;
-        y = 185;
+        this.x = 710;
+        this.y = 185;
     }
 
     public int getX()

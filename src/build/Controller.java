@@ -36,10 +36,7 @@ public class Controller implements KeyListener
             @Override
             public void actionPerformed(ActionEvent actionEvent)
             {
-                view.graphicsPanel.reset();
-                view.graphicsPanel.repaint();
-                view.timer.restart();
-                view.requestFocusInWindow();
+               reset();
             }
         });
 
@@ -101,6 +98,16 @@ public class Controller implements KeyListener
             view.win1Count.setText(""+model.p1Wins);
             view.loss2Count.setText(""+model.p2Losses);
 
+            int choice = JOptionPane.showOptionDialog(null,
+                    "Player 1 wins! Play again?",
+                    "Game Over", JOptionPane.YES_NO_OPTION, 0, null,
+                    null, null);
+
+            if (choice == JOptionPane.YES_OPTION)
+                reset();
+
+            else
+                System.exit(0);
 
         }
 
@@ -110,8 +117,36 @@ public class Controller implements KeyListener
             view.timer.stop();
             model.p1Losses++;
             model.p2Wins++;
-            view.loss1Count.setText(""+);
+            view.loss1Count.setText(""+model.p1Losses);
+            view.win2Count.setText(""+model.p2Wins);
+
+            int choice = JOptionPane.showOptionDialog(null,
+                    "Player 2 wins! Play again?",
+                    "Game Over", JOptionPane.YES_NO_OPTION, 0, null,
+                    null, null);
+
+            if (choice == JOptionPane.YES_OPTION)
+                reset();
+
+            else
+                System.exit(0);
         }
+    }
+
+    public void resetTimer()
+    {
+        leftSideTimer = 0;
+        rightSideTimer = 0;
+    }
+
+    public void reset()
+    {
+        view.graphicsPanel.reset();
+        view.graphicsPanel.repaint();
+        view.timer.restart();
+        resetTimer();
+        view.requestFocusInWindow();
+        view.graphicsPanel.players.freeze(false);
     }
 
     public static void main(String[] args)
