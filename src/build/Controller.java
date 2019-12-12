@@ -12,7 +12,7 @@ import static java.awt.event.KeyEvent.VK_L;
 public class Controller implements KeyListener
 {
     Model model;
-    ClientView view;
+    View view;
     private final int DELAY = 1000;
     private int rightSideTimer = 0;
     private int leftSideTimer = 0;
@@ -20,7 +20,7 @@ public class Controller implements KeyListener
     public Controller(Model m)
     {
         this.model = m;
-        view = new ClientView(this);
+        view = new View(this);
         view.graphicsPanel.players.freeze(false);
 
         view.timer = new Timer(DELAY, new ActionListener()

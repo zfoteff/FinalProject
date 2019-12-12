@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Menu
 {
-    public int showMenu (ClientView view)
+    public int showMenu (View view)
     {
         String[] options = {"New Game", "High Scores", "Quit"};
         int choice = JOptionPane.showOptionDialog(view,
@@ -23,7 +23,7 @@ public class Menu
         return 0;
     }
 
-    public void countdown(ClientView view)
+    public void countdown(View view)
     {
         JOptionPane countdown = new JOptionPane("Countdown");
         JDialog count3 = countdown.createDialog("3");
