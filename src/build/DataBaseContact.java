@@ -12,18 +12,15 @@ public class DataBaseContact {
 
 
     public DataBaseContact () {
-        id = -1; //
         usersName = "";
         highScore = "";
         clickRate = "";
     }
 
 
-    public DataBaseContact (int id, String user, String score, String clickRate) {
-        this.id = id;
+    public DataBaseContact (String user, String score) {
         this.usersName = user;
         this.highScore = score;
-        this.clickRate = clickRate;
     }
 
     @Override
@@ -45,14 +42,6 @@ public class DataBaseContact {
 
     public void setHighScore (String phoneNumber) {
         this.highScore = phoneNumber;
-    }
-
-    public String getClickRate () {
-        return clickRate;
-    }
-
-    public void setClickRate (String clickRate) {
-        this.clickRate = clickRate;
     }
 
 }

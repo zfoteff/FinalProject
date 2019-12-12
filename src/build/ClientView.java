@@ -17,6 +17,8 @@ public class ClientView extends JFrame
     protected Controller controller;
     public Timer timer;
     public GraphicsPanel graphicsPanel;
+    public String p1S;
+    public String p2S;
 
     public ClientView(Controller c)
     {
@@ -114,7 +116,7 @@ public class ClientView extends JFrame
 
         Menu menu = new Menu();
         int choice = menu.showMenu(this);
-        menu.enterPlayerNames(player1Panel, player2Panel);
+        menu.enterPlayerNames(player1Panel, player2Panel, p1S, p2S);
         menu.countdown(this);
     }
 }

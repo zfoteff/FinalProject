@@ -69,11 +69,13 @@ public class Menu
         count1.setVisible(false);
     }
 
-    public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel)
+    public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel, String p1S, String p2S)
     {
         String pn1 = JOptionPane.showInputDialog("Enter Player 1's Name: ");
         String pn2 = JOptionPane.showInputDialog("Enter Player 2's Name: ");
         p1Panel.setBorder(BorderFactory.createTitledBorder(pn1));
+            p1S = pn1;
+            p2S = pn2;
         p2Panel.setBorder(BorderFactory.createTitledBorder(pn2));
     }
 }
