@@ -74,9 +74,9 @@ public class DataBaseTester {
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(sqlRead);
             while (rs.next()) {
-                String usersName = rs.getString(USER_NAME);
                 String highestScore = rs.getString(HIGHEST_SCORE);
-                DataBaseContact help = new DataBaseContact(usersName, highestScore);
+                String usersName = rs.getString(USER_NAME);
+                DataBaseContact help = new DataBaseContact(highestScore,usersName);
                 nameList.add(help);
             }
         }
@@ -86,33 +86,52 @@ public class DataBaseTester {
         }
         return nameList;
     }
-    public String getUserHS (List<DataBaseContact> nameList, String newHS, String pName) {
+    public String getUserHS (List<DataBaseContact> nameList, String newHS) {
         for (DataBaseContact contact : nameList) {
-            String temp = contact.getHighScore();
+            String hs = contact.getHighScore();
+            int intHs = Integer.valueOf(hs);
+            int intNewHs = Integer.valueOf(newHS);
 
-            int hs = Integer.parseInt(temp);
-            System.out.println(hs);
-            int nHS = Integer.parseInt(newHS);
-            System.out.println(nHS);
-            if (pName.equals(contact.getName())){
-                if (nHS < hs) {
-                    return pName + ": " + temp;
-                }
+            String player = contact.getName();
+
+            if (intHs > intNewHs){
+                return player + ": " + newHS;
+            } else {
+                return player + ": " + hs;
             }
+
+
+//            if(hs.compareTo(newHS) < -1) {
+//                System.out.println(player + ": " + hs);
+//                return player + ": " + hs;
+//
+//            }
+//            if (hs.compareTo(newHS) > 1) {
+//                System.out.println(player + ": " + hs);
+//                return player + ": " + newHS;
+//            }
         }
         return "";
     }
-    public String getOverAllHS (List<DataBaseContact> hsList, String newHS, String pName) {
+    public String getOverAllHS (List<DataBaseContact> hsList, String newHS) {
             for (DataBaseContact contact : hsList) {
-                String temp = contact.getHighScore();
-                int hs = Integer.parseInt(temp);
-                int nHS = Integer.parseInt(newHS);
-                if (nHS < hs) {
-                    return pName + ": " + temp;
+                String hs = contact.getHighScore();
+                String player = contact.getName();
+
+
+                if(hs.compareTo(newHS) < -1) {
+                    return player + ":  " + hs;
+
+                }
+                if (hs.compareTo(newHS) > 1) {
+                    return player + ": " + newHS;
                 }
             }
         return "";
     }
+//    public void (String ) {
+//
+////    }
 
 }
 

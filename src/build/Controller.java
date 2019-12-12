@@ -13,9 +13,11 @@ public class Controller implements KeyListener
 {
     Model model;
     View view;
+    protected String timerString;
     private final int DELAY = 1000;
     private int rightSideTimer = 0;
     private int leftSideTimer = 0;
+
 
     public Controller(Model m)
     {
@@ -105,24 +107,30 @@ public class Controller implements KeyListener
                     "Game Over", JOptionPane.YES_NO_OPTION, 0, null,
                     null, null);
 
-            if (choice == JOptionPane.YES_OPTION)
+            if (choice == JOptionPane.YES_OPTION) {
+
                 reset();
+            }
 
             else
                 System.exit(0);
 
             String timer;
             timer = String.valueOf(leftSideTimer + rightSideTimer);
-            DataBaseContact contact = new DataBaseContact(view.p1S, timer);
+            String rightTimer = String.valueOf(rightSideTimer);
+            System.out.println("timer: "+ timer);
+            DataBaseContact contact = new DataBaseContact(rightTimer,view.getP1S());
+            System.out.println("p1: "+view.getP1S());
+            System.out.println("Contact: "+contact);
             DataBaseTester test = new DataBaseTester();
             test.insertRecords(contact);
             List<DataBaseContact> records = test.ReadRecords();
-            String bestScore = test.getUserHS(records, view.timerText.getText(), view.p1S);
-            String overAll = test.getOverAllHS(records, view.timerText.getText(), view.p1S);
+            String bestScore = test.getUserHS(records, view.timerText.getText());
+            String overAll = test.getOverAllHS(records, view.timerText.getText());
             if (!(bestScore.isEmpty())) {
                 view.best1Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);
-            }
+           }
         }
 
         else if (view.graphicsPanel.isWinner() == 2)
@@ -139,28 +147,29 @@ public class Controller implements KeyListener
                     "Game Over", JOptionPane.YES_NO_OPTION, 0, null,
                     null, null);
 
-            if (choice == JOptionPane.YES_OPTION)
+            if (choice == JOptionPane.YES_OPTION) {
                 reset();
-
+            }
             else
                 System.exit(0);
 
 
-            String timer;
-            timer = String.valueOf(leftSideTimer) + String.valueOf(rightSideTimer);
-            DataBaseContact contact = new DataBaseContact(view.p2S, timer);
+            timerString = String.valueOf(leftSideTimer + rightSideTimer);
+            String rightTimer = String.valueOf(rightSideTimer);
+            System.out.println("p2: "+view.getP2S());
+            DataBaseContact contact = new DataBaseContact(rightTimer,view.getP2S());
             DataBaseTester test = new DataBaseTester();
             test.insertRecords(contact);
             List<DataBaseContact> records = test.ReadRecords();
-            String bestScore = test.getUserHS(records, view.timerText.getText(), view.p2S);
-            System.out.println(bestScore);
-            System.out.println(timer);
-            String overAll = test.getOverAllHS(records, view.timerText.getText(), view.p2S);
+            String bestScore = test.getUserHS(records, view.timerText.getText());
+
+            String overAll = test.getOverAllHS(records, view.timerText.getText());
             if (!(bestScore.isEmpty())) {
                 view.best2Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);
             }
         }
+       // resetTimerOnBoard();
     }
 
     public void resetTimer()
@@ -173,10 +182,15 @@ public class Controller implements KeyListener
     {
         view.graphicsPanel.reset();
         view.graphicsPanel.repaint();
-        view.timer.restart();
-        resetTimer();
+//        view.timer.restart();
+//        resetTimer();
         view.requestFocusInWindow();
         view.graphicsPanel.players.freeze(false);
+    }
+
+    public void resetTimerOnBoard(){
+        view.timer.restart();
+        resetTimer();
     }
 
     public static void main(String[] args)

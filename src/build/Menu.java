@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class Menu
 {
+    View view;
+
     public int showMenu (View view)
     {
         String[] options = {"New Game", "High Scores", "Quit"};
@@ -69,13 +71,25 @@ public class Menu
         count1.setVisible(false);
     }
 
-    public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel, String p1S, String p2S)
+    public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel, View view)
     {
-        String pn1 = JOptionPane.showInputDialog("Enter Player 1's Name: ");
-        String pn2 = JOptionPane.showInputDialog("Enter Player 2's Name: ");
+        String pn1 = JOptionPane.showInputDialog("Enter " + view.p1S +"'s Name: ");
+        if (pn1.isEmpty()){
+                view.setP1S("Player 1");
+        }else{
+            view.setP1S(pn1);
+        }
+        String pn2 = JOptionPane.showInputDialog("Enter " + view.p2S +" 's Name: ");
+        if (pn2.isEmpty()){
+            view.setP2S("Player 2");
+        }else{
+            view.setP2S(pn2);
+        }
+
         p1Panel.setBorder(BorderFactory.createTitledBorder(pn1));
-            p1S = pn1;
-            p2S = pn2;
+        view.setP1S(pn1);
+        view.setP2S(pn2);
+
         p2Panel.setBorder(BorderFactory.createTitledBorder(pn2));
     }
 }
