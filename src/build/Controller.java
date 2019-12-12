@@ -39,6 +39,12 @@ public class Controller implements KeyListener
             public void actionPerformed(ActionEvent actionEvent)
             {
                reset();
+               view.loss1Count.setText("0");
+               view.loss2Count.setText("0");
+               view.win1Count.setText("0");
+               view.win2Count.setText("0");
+               view.best1Time.setText("0:00");
+               view.best2Time.setText("0:00");
             }
         });
 
@@ -100,6 +106,15 @@ public class Controller implements KeyListener
             view.win1Count.setText(""+model.p1Wins);
             view.loss2Count.setText(""+model.p2Losses);
 
+            if (view.overallBestTime.getText().equals("0:00"))
+            {
+                view.overallBestTime.setText("0"+leftSideTimer+":"+rightSideTimer);
+                view.overallBestPlayer.setText(view.p1S);
+            }
+
+            if (view.best1Time.getText().equals("0:00"))
+                view.best1Time.setText("0"+leftSideTimer+":"+rightSideTimer);
+
             int choice = JOptionPane.showOptionDialog(null,
                     "Player 1 wins! Play again?",
                     "Game Over", JOptionPane.YES_NO_OPTION, 0, null,
@@ -111,6 +126,7 @@ public class Controller implements KeyListener
             else
                 System.exit(0);
 
+            /*
             String timer;
             timer = String.valueOf(leftSideTimer + rightSideTimer);
             DataBaseContact contact = new DataBaseContact(view.p1S, timer);
@@ -123,6 +139,7 @@ public class Controller implements KeyListener
                 view.best1Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);
             }
+            */
         }
 
         else if (view.graphicsPanel.isWinner() == 2)
@@ -133,6 +150,15 @@ public class Controller implements KeyListener
             model.p2Wins++;
             view.loss1Count.setText(""+model.p1Losses);
             view.win2Count.setText(""+model.p2Wins);
+
+            if (view.overallBestTime.getText().equals("0:00"))
+            {
+                view.overallBestTime.setText("0"+leftSideTimer+":"+rightSideTimer);
+                view.overallBestPlayer.setText(""+view.p2S);
+            }
+
+            if (view.best2Time.getText().equals("0:00"))
+                view.best2Time.setText("0"+leftSideTimer+":"+rightSideTimer);
 
             int choice = JOptionPane.showOptionDialog(null,
                     "Player 2 wins! Play again?",
@@ -145,7 +171,7 @@ public class Controller implements KeyListener
             else
                 System.exit(0);
 
-
+            /*
             String timer;
             timer = String.valueOf(leftSideTimer) + String.valueOf(rightSideTimer);
             DataBaseContact contact = new DataBaseContact(view.p2S, timer);
@@ -160,6 +186,8 @@ public class Controller implements KeyListener
                 view.best2Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);
             }
+
+             */
         }
     }
 

@@ -127,6 +127,6 @@ public class View extends JFrame
         }
 
 
-        menu.enterPlayerNames(player1Panel, player2Panel, p1S, p2S);
+        menu.enterPlayerNames(player1Panel, player2Panel, this);
     }
 }
