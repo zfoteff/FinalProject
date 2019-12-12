@@ -22,8 +22,8 @@ public class Menu
 
         return 0;
     }
-    
-    public void countdown(ClientView view)
+
+    public void countdown(View view)
     {
         JOptionPane countdown = new JOptionPane("Countdown");
         JDialog count3 = countdown.createDialog("3");
@@ -70,7 +70,6 @@ public class Menu
     }
 
     public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel, String p1S, String p2S)
->>>>>>> 5a5c72d6fcbbc45c4760a13580ff1454d301c3d8
     {
         String pn1 = JOptionPane.showInputDialog("Enter Player 1's Name: ");
         String pn2 = JOptionPane.showInputDialog("Enter Player 2's Name: ");
