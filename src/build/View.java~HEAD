@@ -17,6 +17,8 @@ public class View extends JFrame
     protected Controller controller;
     public Timer timer;
     public GraphicsPanel graphicsPanel;
+    public String p1S;
+    public String p2S;
 
     public View(Controller c)
     {
@@ -114,8 +116,22 @@ public class View extends JFrame
 
         Menu menu = new Menu();
         int choice = menu.showMenu(this);
+<<<<<<< HEAD:src/build/View.java
+
+        while (choice != 0)
+        {
+            if (choice == 2)
+                System.exit(0);
+
+            //  access database here
+            choice = menu.showMenu(this);
+        }
 
 
         menu.enterPlayerNames(player1Panel, player2Panel);
+=======
+        menu.enterPlayerNames(player1Panel, player2Panel, p1S, p2S);
+        menu.countdown(this);
+>>>>>>> 5a5c72d6fcbbc45c4760a13580ff1454d301c3d8:src/build/ClientView.java
     }
 }

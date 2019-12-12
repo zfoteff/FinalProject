@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
+
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_L;
 
@@ -109,6 +111,18 @@ public class Controller implements KeyListener
             else
                 System.exit(0);
 
+            String timer;
+            timer = String.valueOf(leftSideTimer + rightSideTimer);
+            DataBaseContact contact = new DataBaseContact(view.p1S, timer);
+            DataBaseTester test = new DataBaseTester();
+            test.insertRecords(contact);
+            List<DataBaseContact> records = test.ReadRecords();
+            String bestScore = test.getUserHS(records,leftSideTimer + rightSideTimer, view.p1S);
+            String overAll = test.getOverAllHS(records, leftSideTimer + rightSideTimer, view.p1S);
+            if (!(bestScore.isEmpty())) {
+                view.best1Time.setText(bestScore);
+                view.overallBestTime.setText(overAll);
+            }
         }
 
         else if (view.graphicsPanel.isWinner() == 2)
@@ -130,6 +144,20 @@ public class Controller implements KeyListener
 
             else
                 System.exit(0);
+
+
+            String timer;
+            timer = String.valueOf(leftSideTimer) + String.valueOf(rightSideTimer);
+            DataBaseContact contact = new DataBaseContact(view.p2S, timer);
+            DataBaseTester test = new DataBaseTester();
+            test.insertRecords(contact);
+            List<DataBaseContact> records = test.ReadRecords();
+            String bestScore = test.getUserHS(records,leftSideTimer + rightSideTimer, view.p2S);
+            String overAll = test.getOverAllHS(records, leftSideTimer + rightSideTimer, view.p2S);
+            if (!(bestScore.isEmpty())) {
+                view.best2Time.setText(bestScore);
+                view.overallBestTime.setText(overAll);
+            }
         }
     }
 

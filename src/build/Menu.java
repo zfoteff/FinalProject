@@ -22,12 +22,61 @@ public class Menu
 
         return 0;
     }
+    
+    public void countdown(ClientView view)
+    {
+        JOptionPane countdown = new JOptionPane("Countdown");
+        JDialog count3 = countdown.createDialog("3");
+        JDialog count2 = countdown.createDialog("2");
+        JDialog count1 = countdown.createDialog("1");
+        count3.setVisible(false);
+        count2.setVisible(false);
+        count1.setVisible(false);
 
-    public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel)
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        count3.setVisible(true);
+        count2.setVisible(false);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        count3.setVisible(false);
+        count2.setVisible(true);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        count2.setVisible(false);
+        count1.setVisible(true);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        count1.setVisible(false);
+    }
+
+    public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel, String p1S, String p2S)
+>>>>>>> 5a5c72d6fcbbc45c4760a13580ff1454d301c3d8
     {
         String pn1 = JOptionPane.showInputDialog("Enter Player 1's Name: ");
         String pn2 = JOptionPane.showInputDialog("Enter Player 2's Name: ");
         p1Panel.setBorder(BorderFactory.createTitledBorder(pn1));
+            p1S = pn1;
+            p2S = pn2;
         p2Panel.setBorder(BorderFactory.createTitledBorder(pn2));
     }
 }
