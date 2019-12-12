@@ -82,7 +82,7 @@ public class Controller implements KeyListener
     @Override
     public void keyReleased(KeyEvent e)
     {
-        System.out.println("KEY PRESS");
+       // System.out.println("KEY PRESS");
         if (e.getKeyCode() == VK_A)
             view.graphicsPanel.players.moveRight();
 
@@ -117,8 +117,8 @@ public class Controller implements KeyListener
             DataBaseTester test = new DataBaseTester();
             test.insertRecords(contact);
             List<DataBaseContact> records = test.ReadRecords();
-            String bestScore = test.getUserHS(records,leftSideTimer + rightSideTimer, view.p1S);
-            String overAll = test.getOverAllHS(records, leftSideTimer + rightSideTimer, view.p1S);
+            String bestScore = test.getUserHS(records, view.timerText.getText(), view.p1S);
+            String overAll = test.getOverAllHS(records, view.timerText.getText(), view.p1S);
             if (!(bestScore.isEmpty())) {
                 view.best1Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);
@@ -152,8 +152,10 @@ public class Controller implements KeyListener
             DataBaseTester test = new DataBaseTester();
             test.insertRecords(contact);
             List<DataBaseContact> records = test.ReadRecords();
-            String bestScore = test.getUserHS(records,leftSideTimer + rightSideTimer, view.p2S);
-            String overAll = test.getOverAllHS(records, leftSideTimer + rightSideTimer, view.p2S);
+            String bestScore = test.getUserHS(records, view.timerText.getText(), view.p2S);
+            System.out.println(bestScore);
+            System.out.println(timer);
+            String overAll = test.getOverAllHS(records, view.timerText.getText(), view.p2S);
             if (!(bestScore.isEmpty())) {
                 view.best2Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);

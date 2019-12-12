@@ -45,7 +45,7 @@ public class DataBaseTester {
                 stmt.execute(sqlCreate);
             }
             catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());;
             }
 
         }
@@ -86,23 +86,28 @@ public class DataBaseTester {
         }
         return nameList;
     }
-    public String getUserHS (List<DataBaseContact> nameList, int newHS, String pName) {
+    public String getUserHS (List<DataBaseContact> nameList, String newHS, String pName) {
         for (DataBaseContact contact : nameList) {
             String temp = contact.getHighScore();
+
             int hs = Integer.parseInt(temp);
+            System.out.println(hs);
+            int nHS = Integer.parseInt(newHS);
+            System.out.println(nHS);
             if (pName.equals(contact.getName())){
-                if (newHS < hs) {
+                if (nHS < hs) {
                     return pName + ": " + temp;
                 }
             }
         }
         return "";
     }
-    public String getOverAllHS (List<DataBaseContact> hsList, int newHS, String pName) {
+    public String getOverAllHS (List<DataBaseContact> hsList, String newHS, String pName) {
             for (DataBaseContact contact : hsList) {
                 String temp = contact.getHighScore();
                 int hs = Integer.parseInt(temp);
-                if (newHS < hs) {
+                int nHS = Integer.parseInt(newHS);
+                if (nHS < hs) {
                     return pName + ": " + temp;
                 }
             }
