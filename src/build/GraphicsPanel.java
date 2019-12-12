@@ -4,11 +4,11 @@ import java.awt.*;
 
 public class GraphicsPanel extends JPanel
 {
-    protected ClientView targetView;
+    protected View targetView;
     protected Background backgroundImage;
     protected Doggos players;
 
-    public GraphicsPanel(ClientView view)
+    public GraphicsPanel(View view)
     {
         targetView = view;
         setBackground(Color.WHITE);

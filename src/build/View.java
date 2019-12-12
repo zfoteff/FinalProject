@@ -2,7 +2,7 @@ package build;
 import javax.swing.*;
 import java.awt.*;
 
-public class ClientView extends JFrame
+public class View extends JFrame
 {
     protected JLabel win1Count;
     protected JLabel loss1Count;
@@ -18,7 +18,7 @@ public class ClientView extends JFrame
     public Timer timer;
     public GraphicsPanel graphicsPanel;
 
-    public ClientView(Controller c)
+    public View(Controller c)
     {
         super("Fun Clicker Game");
         this.controller = c;
@@ -114,7 +114,17 @@ public class ClientView extends JFrame
 
         Menu menu = new Menu();
         int choice = menu.showMenu(this);
+
+        while (choice != 0)
+        {
+            if (choice == 2)
+                System.exit(0);
+
+            //  access database here
+            choice = menu.showMenu(this);
+        }
+
+
         menu.enterPlayerNames(player1Panel, player2Panel);
-        menu.countdown(this);
     }
 }

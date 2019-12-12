@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Menu
 {
-    public int showMenu (ClientView view)
+    public int showMenu (View view)
     {
         String[] options = {"New Game", "High Scores", "Quit"};
         int choice = JOptionPane.showOptionDialog(view,
@@ -21,52 +21,6 @@ public class Menu
             return 2;
 
         return 0;
-    }
-
-    public void countdown(ClientView view)
-    {
-        JOptionPane countdown = new JOptionPane("Countdown");
-        JDialog count3 = countdown.createDialog("3");
-        JDialog count2 = countdown.createDialog("2");
-        JDialog count1 = countdown.createDialog("1");
-        count3.setVisible(false);
-        count2.setVisible(false);
-        count1.setVisible(false);
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        count3.setVisible(true);
-        count2.setVisible(false);
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        count3.setVisible(false);
-        count2.setVisible(true);
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        count2.setVisible(false);
-        count1.setVisible(true);
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        count1.setVisible(false);
     }
 
     public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel)
