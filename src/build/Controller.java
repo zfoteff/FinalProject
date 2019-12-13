@@ -1,3 +1,13 @@
+/**
+ * This is the Controller class. It has the keylisteners and connects most of the code logic together.
+ * CPSC 224, Fall 2019
+ *Final Project
+ * No sources to cite.
+ *
+ * @author Kat Sotelo, Zac Foteff, Rebekah Hale
+ * @version v1.0 12/12/19
+ */
+
 package build;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +21,9 @@ import static java.awt.event.KeyEvent.VK_L;
 
 public class Controller implements KeyListener
 {
+    /**
+     * fields
+     */
     Model model;
     View view;
     protected String timerString;
@@ -18,7 +31,10 @@ public class Controller implements KeyListener
     private int rightSideTimer = 0;
     private int leftSideTimer = 0;
 
-
+    /**
+     * Initializes the model and view. has action listeners for the timer and the reset buttons.
+     * @param m , Model
+     */
     public Controller(Model m)
     {
         this.model = m;
@@ -49,6 +65,9 @@ public class Controller implements KeyListener
         view.timer.start();
     }
 
+    /**
+     * increments the timer with two fields, right side and leftside. The timer only goes up to 5 min
+     */
     public void incrementTimer()
     {
         while (rightSideTimer != 60) {
@@ -74,12 +93,22 @@ public class Controller implements KeyListener
         return;
     }
 
+    /**
+     * calls repaint when the key is pressed to update the view
+     * @param e , the KeyEvent that occurs
+     */
     @Override
     public void keyPressed(KeyEvent e)
     {
         view.graphicsPanel.repaint();
     }
 
+    /**
+     * This method has most of the game logic. It allows the players to move based on the key that was released
+     * Also keeps track of who the winner is. If the winner is player 1 their scores and names goes to the database.
+     * it also changes the view based on who won and loss.
+     * @param e , the KeyEvent that occurs
+     */
     @Override
     public void keyReleased(KeyEvent e)
     {
@@ -101,13 +130,20 @@ public class Controller implements KeyListener
             view.win1Count.setText("" + model.p1Wins);
             view.loss2Count.setText("" + model.p2Losses);
 
-            if (view.overallBestTime.getText().equals("0:00")) {
-                view.overallBestTime.setText("0" + leftSideTimer + ":" + rightSideTimer);
-                view.overallBestPlayer.setText(view.p1S);
-            }
-
-            if (view.best1Time.getText().equals("0:00"))
-                view.best1Time.setText("0" + leftSideTimer + ":" + rightSideTimer);
+            String timer;
+            timer = ""+leftSideTimer+": "+rightSideTimer;
+            System.out.println("timer: " + timer);
+            DataBaseContact contact = new DataBaseContact(timer, view.getP1S());
+            System.out.println("p1: " + view.getP1S());
+            System.out.println("Contact: " + contact);
+            DataBaseTester test = new DataBaseTester();
+            test.insertRecords(contact);
+            List<DataBaseContact> records = test.ReadRecords();
+            String bestScore = test.getUserHS(records, view.timerText.getText(), view.getP1S());
+            String[] overAll = test.getOverAllHS(records, view.timerText.getText());
+            view.best1Time.setText(bestScore);
+            view.overallBestPlayer.setText(overAll[0]);
+            view.overallBestTime.setText(overAll[1]);
 
             int choice = JOptionPane.showOptionDialog(null,
                     view.p1S + " wins! Play again?",
@@ -119,25 +155,6 @@ public class Controller implements KeyListener
                 reset();
             } else
                 System.exit(0);
-
-
-            String timer;
-            timer = String.valueOf(leftSideTimer + rightSideTimer);
-            String rightTimer = String.valueOf(rightSideTimer);
-            System.out.println("timer: " + timer);
-
-            DataBaseContact contact = new DataBaseContact(timer, view.getP1S());
-            System.out.println("p1: " + view.getP1S());
-            System.out.println("Contact: " + contact);
-            DataBaseTester test = new DataBaseTester();
-            test.insertRecords(contact);
-            List<DataBaseContact> records = test.ReadRecords();
-            String bestScore = test.getUserHS(records, view.timerText.getText(), view.getP1S());
-            String overAll = test.getOverAllHS(records, view.timerText.getText());
-
-            view.best1Time.setText(bestScore);
-            view.overallBestTime.setText(overAll);
-
         }
 
         else if(view.graphicsPanel.isWinner()==2)
@@ -149,13 +166,20 @@ public class Controller implements KeyListener
             view.loss1Count.setText("" + model.p1Losses);
             view.win2Count.setText("" + model.p2Wins);
 
-            if (view.overallBestTime.getText().equals("0:00")) {
-                view.overallBestTime.setText("0" + leftSideTimer + ":" + rightSideTimer);
-                view.overallBestPlayer.setText("" + view.p2S);
-            }
-
-            if (view.best2Time.getText().equals("0:00"))
-                view.best2Time.setText("0" + leftSideTimer + ":" + rightSideTimer);
+            String timer;
+            timer = ""+leftSideTimer+":"+rightSideTimer;
+            System.out.println("timer: " + timer);
+            DataBaseContact contact = new DataBaseContact(timer, view.getP2S());
+            System.out.println("p2: " + view.getP2S());
+            System.out.println("Contact: " + contact);
+            DataBaseTester test = new DataBaseTester();
+            test.insertRecords(contact);
+            List<DataBaseContact> records = test.ReadRecords();
+            String bestScore = test.getUserHS(records, view.timerText.getText(), view.getP2S());
+            String[] overAll = test.getOverAllHS(records, view.timerText.getText());
+            view.best2Time.setText(bestScore);
+            view.overallBestPlayer.setText(overAll[0]);
+            view.overallBestTime.setText(overAll[1]);
 
             int choice = JOptionPane.showOptionDialog(null,
                     view.p2S + " wins! Play again?",
@@ -168,30 +192,23 @@ public class Controller implements KeyListener
         } else
             System.exit(0);
 
-        String timer;
-        timer = String.valueOf(leftSideTimer + rightSideTimer);
-        String rightTimer = String.valueOf(rightSideTimer);
-        System.out.println("timer: " + timer);
-        DataBaseContact contact = new DataBaseContact(timer, view.getP2S());
-        System.out.println("p2: " + view.getP2S());
-        System.out.println("Contact: " + contact);
-        DataBaseTester test = new DataBaseTester();
-        test.insertRecords(contact);
-        List<DataBaseContact> records = test.ReadRecords();
-        String bestScore = test.getUserHS(records, view.timerText.getText(), view.getP2S());
-        String overAll = test.getOverAllHS(records, view.timerText.getText());
-        view.best2Time.setText(bestScore);
-        view.overallBestTime.setText(overAll);
+
     }
 
 }
 
+    /**
+     *resets the timer to be 0
+     */
     public void resetTimer()
     {
         leftSideTimer = 0;
         rightSideTimer = 0;
     }
 
+    /**
+     *resets the graphic panel and calls repaint and allos the players to be able to move again
+     */
     public void reset()
     {
         view.graphicsPanel.reset();
@@ -200,11 +217,17 @@ public class Controller implements KeyListener
         view.graphicsPanel.players.freeze(false);
     }
 
+    /**
+     *resets the timer on the board
+     */
     public void resetTimerOnBoard(){
         view.timer.restart();
         resetTimer();
     }
 
+    /**
+     *main that invokes the controller and starts the game
+     */
     public static void main(String[] args)
     {
         Model m = new Model();

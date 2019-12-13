@@ -1,9 +1,21 @@
+/**
+ * This is the view class. It makes up the GUI componenet and calls the paint component to put the panel on the frame
+ * CPSC 224, Fall 2019
+ *Final Project
+ * No sources to cite.
+ *
+ * @author Kat Sotelo, Zac Foteff, Rebekah Hale
+ * @version v1.0 12/12/19
+ */
 package build;
 import javax.swing.*;
 import java.awt.*;
 
 public class View extends JFrame
 {
+    /**
+     *fields
+     */
     protected JLabel win1Count;
     protected JLabel loss1Count;
     protected JLabel best1Time;
@@ -20,6 +32,10 @@ public class View extends JFrame
     protected String p2S;
     protected String p1S;
 
+    /**
+     *controller
+     * @param c gets the controller
+     */
     public View(Controller c)
     {
         super("Fun Clicker Game");
@@ -30,6 +46,9 @@ public class View extends JFrame
         pack();
     }
 
+    /**
+     *sets up the UI with all of the fields
+     */
     public void setupUI()
     {
         //main panel
@@ -117,30 +136,39 @@ public class View extends JFrame
         Menu menu = new Menu();
         int choice = menu.showMenu(this);
 
-        while (choice != 0)
-        {
-            if (choice == 2)
-                System.exit(0);
+        if (choice == 1)
+            System.exit(0);
 
-            //  access database here
-            choice = menu.showMenu(this);
-        }
         menu.enterPlayerNames(player1Panel, player2Panel,this);
         System.out.println(p2S + p2S);
     }
 
+    /**
+     *gets the player 1 name
+     */
     public String getP1S() {
         return p1S;
     }
 
+    /**
+     *gets the player 2 name
+     */
     public String getP2S() {
         return p2S;
     }
 
+    /**
+     *sets the player 1 name
+     * @param p1S , string of player 1
+     */
     public void setP1S(String p1S) {
         this.p1S = p1S;
     }
 
+    /**
+     *sets the player 2 name
+     * @param p2S string of player 2
+     */
     public void setP2S(String p2S) {
         this.p2S = p2S;
     }

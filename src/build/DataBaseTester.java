@@ -1,3 +1,13 @@
+/**
+ * This is the database tester class. It accesses the database using sqlite
+ * CPSC 224, Fall 2019
+ *Final Project
+ * Dr. Gina Sprint's notes
+ *
+ * @author Kat Sotelo, Zac Foteff, Rebekah Hale
+ * @version v1.0 12/12/19
+ */
+
 package build;
 
 import java.sql.*;
@@ -16,11 +26,17 @@ public class DataBaseTester {
     protected List<DataBaseContact> nameList;
 
 
+    /**
+     *constructor
+     */
     public DataBaseTester() {
         dataBaseConnector();
         createTable();
     }
 
+    /**
+     *connects to the database
+     */
     public void dataBaseConnector() {
         try {
             Connection connect = DriverManager.getConnection(CONNECTION_URL);
@@ -34,6 +50,9 @@ public class DataBaseTester {
 
     }
 
+    /**
+     *creates a table in the database
+     */
     public void createTable() {
         String sqlCreate = "CREATE TABLE " + DATABASE_NAME + "(" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -51,6 +70,9 @@ public class DataBaseTester {
 
     }
 
+    /**
+     *inserts the Database Contact (with the username and highscore) into the database
+     */
     public void insertRecords(DataBaseContact contact) {
         String sqlCreate = "INSERT INTO " + DATABASE_NAME
                 + " VALUES(null, '" + contact.getHighScore()
@@ -65,6 +87,9 @@ public class DataBaseTester {
         }
     }
 
+    /**
+     *Goes through the list of DatabaseContact and reads each contact
+     */
     public List<DataBaseContact> ReadRecords() {
         nameList = new ArrayList<>();
         String sqlRead = "SELECT * FROM "
@@ -86,6 +111,9 @@ public class DataBaseTester {
         return nameList;
     }
 
+    /**
+     *gets the user high score by comparing it to the last highscore
+     */
     public String getUserHS(List<DataBaseContact> hsList, String newHS, String pName) {
         List<String> scores = new ArrayList<>();
         List<String> allNames = new ArrayList<>();
@@ -103,7 +131,11 @@ public class DataBaseTester {
         return "";
     }
 
-    public String getOverAllHS(List<DataBaseContact> hsList, String newHS) {
+    /**
+     *gets the overall highscore by comparing it to the one in the database
+     * @return String[] with the top player name and score
+     */
+    public String[] getOverAllHS(List<DataBaseContact> hsList, String newHS) {
         List<String> pName = new ArrayList<>();
         List<String> scores = new ArrayList<>();
         for (DataBaseContact contact: hsList) {
@@ -113,11 +145,10 @@ public class DataBaseTester {
             pName.add(contact.getName());
         }
 
-        return pName.get(0) + ": " + scores.get(0);
+        String[] arr = {pName.get(0), scores.get(0)};
+
+        return arr;
     }
 }
-//    public void (String ) {
-//
-////    }
 
 
