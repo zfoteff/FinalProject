@@ -44,4 +44,7 @@ public class DataBaseContact {
         this.highScore = phoneNumber;
     }
 
+    public int getId () {
+        return id;
+    }
 }

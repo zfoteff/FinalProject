@@ -19,6 +19,7 @@ public class Controller implements KeyListener
     private int leftSideTimer = 0;
 
 
+
     public Controller(Model m)
     {
         this.model = m;
@@ -40,7 +41,8 @@ public class Controller implements KeyListener
             @Override
             public void actionPerformed(ActionEvent actionEvent)
             {
-               reset();
+
+               resetTimerOnBoard();
             }
         });
 
@@ -84,6 +86,7 @@ public class Controller implements KeyListener
     @Override
     public void keyReleased(KeyEvent e)
     {
+
        // System.out.println("KEY PRESS");
         if (e.getKeyCode() == VK_A)
             view.graphicsPanel.players.moveRight();
@@ -103,12 +106,12 @@ public class Controller implements KeyListener
             view.loss2Count.setText(""+model.p2Losses);
 
             int choice = JOptionPane.showOptionDialog(null,
-                    "Player 1 wins! Play again?",
+                    view.p1S + " wins! Play again?",
                     "Game Over", JOptionPane.YES_NO_OPTION, 0, null,
                     null, null);
 
             if (choice == JOptionPane.YES_OPTION) {
-
+                resetTimerOnBoard();
                 reset();
             }
 
@@ -119,18 +122,19 @@ public class Controller implements KeyListener
             timer = String.valueOf(leftSideTimer + rightSideTimer);
             String rightTimer = String.valueOf(rightSideTimer);
             System.out.println("timer: "+ timer);
-            DataBaseContact contact = new DataBaseContact(rightTimer,view.getP1S());
+
+            DataBaseContact contact = new DataBaseContact(timer,view.getP1S());
             System.out.println("p1: "+view.getP1S());
             System.out.println("Contact: "+contact);
             DataBaseTester test = new DataBaseTester();
             test.insertRecords(contact);
             List<DataBaseContact> records = test.ReadRecords();
-            String bestScore = test.getUserHS(records, view.timerText.getText());
+            String bestScore = test.getUserHS(records, view.timerText.getText(), view.getP1S());
             String overAll = test.getOverAllHS(records, view.timerText.getText());
-            if (!(bestScore.isEmpty())) {
+
                 view.best1Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);
-           }
+
         }
 
         else if (view.graphicsPanel.isWinner() == 2)
@@ -143,33 +147,33 @@ public class Controller implements KeyListener
             view.win2Count.setText(""+model.p2Wins);
 
             int choice = JOptionPane.showOptionDialog(null,
-                    "Player 2 wins! Play again?",
+                    view.p2S + " wins! Play again?",
                     "Game Over", JOptionPane.YES_NO_OPTION, 0, null,
                     null, null);
 
             if (choice == JOptionPane.YES_OPTION) {
+                resetTimerOnBoard();
                 reset();
             }
             else
                 System.exit(0);
-
-
-            timerString = String.valueOf(leftSideTimer + rightSideTimer);
+            String timer;
+            timer = String.valueOf(leftSideTimer + rightSideTimer);
             String rightTimer = String.valueOf(rightSideTimer);
+            System.out.println("timer: "+ timer);
+            DataBaseContact contact = new DataBaseContact(timer,view.getP2S());
             System.out.println("p2: "+view.getP2S());
-            DataBaseContact contact = new DataBaseContact(rightTimer,view.getP2S());
+            System.out.println("Contact: "+contact);
             DataBaseTester test = new DataBaseTester();
             test.insertRecords(contact);
             List<DataBaseContact> records = test.ReadRecords();
-            String bestScore = test.getUserHS(records, view.timerText.getText());
-
+            String bestScore = test.getUserHS(records, view.timerText.getText(), view.getP2S());
             String overAll = test.getOverAllHS(records, view.timerText.getText());
-            if (!(bestScore.isEmpty())) {
                 view.best2Time.setText(bestScore);
                 view.overallBestTime.setText(overAll);
-            }
+
         }
-       // resetTimerOnBoard();
+
     }
 
     public void resetTimer()

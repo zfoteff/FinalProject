@@ -73,13 +73,13 @@ public class Menu
 
     public void enterPlayerNames (JPanel p1Panel, JPanel p2Panel, View view)
     {
-        String pn1 = JOptionPane.showInputDialog("Enter " + view.p1S +"'s Name: ");
+        String pn1 = JOptionPane.showInputDialog("Enter Player1's Name: ");
         if (pn1.isEmpty()){
                 view.setP1S("Player 1");
         }else{
             view.setP1S(pn1);
         }
-        String pn2 = JOptionPane.showInputDialog("Enter " + view.p2S +" 's Name: ");
+        String pn2 = JOptionPane.showInputDialog("Enter Player2's Name: ");
         if (pn2.isEmpty()){
             view.setP2S("Player 2");
         }else{
