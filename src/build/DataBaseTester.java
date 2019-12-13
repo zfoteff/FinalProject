@@ -90,12 +90,13 @@ public class DataBaseTester {
         List<String> scores = new ArrayList<>();
         List<String> allNames = new ArrayList<>();
 
-        for (DataBaseContact contact : hsList) {
+        for (DataBaseContact contact : hsList)
             if (contact.getName().equals(pName)) {
             Collections.sort(scores);
             Collections.sort(allNames);
             allNames.add(contact.getName());
             scores.add(contact.getHighScore());
+            if (contact.getName().equals(pName)) {
                 return contact.getName() + ":  " + scores.get(0);
             }
         }
