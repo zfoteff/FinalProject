@@ -18,7 +18,7 @@ public class DataBaseContact {
     }
 
 
-    public DataBaseContact (String user, String score) {
+    public DataBaseContact (String score, String user) {
         this.usersName = user;
         this.highScore = score;
     }
@@ -44,4 +44,7 @@ public class DataBaseContact {
         this.highScore = phoneNumber;
     }
 
+    public int getId () {
+        return id;
+    }
 }

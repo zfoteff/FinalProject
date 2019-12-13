@@ -17,8 +17,8 @@ public class View extends JFrame
     protected Controller controller;
     public Timer timer;
     public GraphicsPanel graphicsPanel;
-    public String p2S;
-    public String p1S;
+    protected String p2S;
+    protected String p1S;
 
     public View(Controller c)
     {
@@ -125,8 +125,23 @@ public class View extends JFrame
             //  access database here
             choice = menu.showMenu(this);
         }
+        menu.enterPlayerNames(player1Panel, player2Panel,this);
+        System.out.println(p2S + p2S);
+    }
 
+    public String getP1S() {
+        return p1S;
+    }
 
-        menu.enterPlayerNames(player1Panel, player2Panel, this);
+    public String getP2S() {
+        return p2S;
+    }
+
+    public void setP1S(String p1S) {
+        this.p1S = p1S;
+    }
+
+    public void setP2S(String p2S) {
+        this.p2S = p2S;
     }
 }
